@@ -1,0 +1,46 @@
+
+:root{--navy:#1f4e79;--brass:#d4af37;--ink:#1c2733;--muted:#6f6859;--line:#e4ded2;--bg:#fdfcf9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:17px/1.65 "Mulish",-apple-system,Segoe UI,sans-serif;color:var(--ink);background:var(--bg)}
+h1,h2,h3,.logo{font-family:"Jost",sans-serif}
+a{color:var(--navy)}
+.wrap{max-width:760px;margin:0 auto;padding:0 24px}
+header{border-bottom:2px solid var(--navy);background:#fff}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0;flex-wrap:wrap;gap:10px}
+.logo{font-weight:700;font-size:22px;letter-spacing:.06em;color:var(--navy);text-decoration:none}
+.logo span{display:block;font-size:9px;letter-spacing:.4em;color:var(--brass);font-weight:500;text-transform:uppercase}
+.nav a.link{margin-left:22px;text-decoration:none;font-weight:600;font-size:15px}
+.hero{padding:70px 0 55px;background:linear-gradient(180deg,#fff, var(--bg))}
+.hero h1{font-size:clamp(28px,5vw,44px);line-height:1.15;color:var(--navy);max-width:640px}
+.hero p{margin-top:18px;font-size:19px;color:var(--muted);max-width:600px}
+.brass{color:var(--brass)}
+section{padding:48px 0}
+section h2{font-size:26px;color:var(--navy);margin-bottom:14px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-top:22px}
+.card{background:#fff;border:1px solid var(--line);border-left:3px solid var(--brass);border-radius:0 10px 10px 0;padding:18px}
+.card b{color:var(--navy);display:block;margin-bottom:6px;font-size:15.5px}
+.card p{font-size:14.5px;color:var(--muted);line-height:1.5}
+.postlist{list-style:none;margin-top:10px}
+.postlist li{padding:16px 0;border-bottom:1px solid var(--line)}
+.postlist a{font-family:"Jost",sans-serif;font-weight:600;font-size:19px;text-decoration:none}
+.postlist p{color:var(--muted);font-size:15px;margin-top:4px}
+.newsletter{background:var(--navy);color:#fff;border-radius:12px;padding:34px;text-align:center;margin:20px 0 10px}
+.newsletter h2{color:#fff}
+.newsletter p{color:#cfd8e3;margin:8px 0 18px}
+.newsletter form{display:flex;gap:10px;max-width:420px;margin:0 auto;flex-wrap:wrap}
+.newsletter input{flex:1;min-width:200px;padding:12px 14px;border-radius:8px;border:none;font-size:15px}
+.newsletter button{padding:12px 22px;border-radius:8px;border:none;background:var(--brass);color:#1c2733;font-weight:700;font-size:15px;cursor:pointer}
+footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);font-size:13.5px}
+article{padding:46px 0}
+article h1{font-size:clamp(26px,4.5vw,38px);line-height:1.2;color:var(--navy);margin-bottom:14px}
+article h2{font-size:23px;color:var(--navy);margin:30px 0 10px}
+article p{margin:14px 0}
+article li{margin:8px 0 8px 22px}
+article strong{color:var(--navy)}
+article em{color:var(--muted)}
+article table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15.5px}
+article th,article td{border-bottom:1px solid var(--line);text-align:left;padding:8px 10px 8px 0}
+article th{color:var(--navy);font-family:"Jost",sans-serif;font-size:13.5px;text-transform:uppercase;letter-spacing:.06em}
+article hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.backlink{font-size:14px;font-weight:600;text-decoration:none}
+@media(max-width:600px){.hero{padding:46px 0 36px}}
