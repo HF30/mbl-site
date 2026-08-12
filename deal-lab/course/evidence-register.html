@@ -1,0 +1,176 @@
+<meta charset="utf-8">
+<title>MBL — Evidence Register Worksheet</title>
+<style>
+  :root {
+    --ground:#0f1620; --surface:#16212e; --surface2:#1b2836; --ink:#e9e6dd; --muted:#93a0ad;
+    --brass:#d0aa41; --brass-deep:#b9932e; --line:rgba(208,170,65,0.18); --hair:rgba(255,255,255,0.09);
+    --verified:#7ec98f; --assumed:#e0a44f; --open:#8b95a3;
+    --font-display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --font-body:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:light){
+    :root{--ground:#f5f2ea;--surface:#fff;--surface2:#faf8f2;--ink:#1c2530;--muted:#5d6772;
+    --brass:#9c7c1c;--brass-deep:#856a17;--line:rgba(156,124,28,0.28);--hair:rgba(0,0,0,0.12);
+    --verified:#2f8a4e;--assumed:#b5771f;--open:#5d6772;}
+  }
+  :root[data-theme="dark"]{--ground:#0f1620;--surface:#16212e;--surface2:#1b2836;--ink:#e9e6dd;--muted:#93a0ad;--brass:#d0aa41;--line:rgba(208,170,65,0.18);--hair:rgba(255,255,255,0.09);--verified:#7ec98f;--assumed:#e0a44f;--open:#8b95a3;}
+  :root[data-theme="light"]{--ground:#f5f2ea;--surface:#fff;--surface2:#faf8f2;--ink:#1c2530;--muted:#5d6772;--brass:#9c7c1c;--line:rgba(156,124,28,0.28);--hair:rgba(0,0,0,0.12);--verified:#2f8a4e;--assumed:#b5771f;--open:#5d6772;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font-body);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1340px;margin:0 auto;padding:clamp(22px,4vw,48px) clamp(16px,3vw,34px) 70px}
+  .eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--brass);display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:30px;height:1.5px;background:var(--brass)}
+  h1{font-family:var(--font-display);font-weight:600;font-size:clamp(30px,5vw,46px);margin:16px 0 0;letter-spacing:-.01em}
+  h1 em{font-style:italic;color:var(--brass)}
+  .lede{color:var(--muted);font-size:16px;max-width:70ch;margin:12px 0 0}
+  /* meta row */
+  .meta{display:flex;flex-wrap:wrap;gap:18px 34px;margin:26px 0 8px;padding-bottom:22px;border-bottom:1px solid var(--hair)}
+  .meta label{display:flex;flex-direction:column;gap:6px;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .meta input{font-family:var(--font-body);font-size:15px;color:var(--ink);background:transparent;border:none;border-bottom:1px solid var(--line);padding:5px 2px;min-width:200px}
+  .meta input:focus{outline:none;border-bottom-color:var(--brass)}
+  /* toolbar */
+  .bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0 14px}
+  .btn{appearance:none;cursor:pointer;font-family:var(--font-body);font-size:13.5px;font-weight:600;padding:9px 16px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink);transition:.15s}
+  .btn:hover{background:var(--brass);color:var(--ground);border-color:var(--brass)}
+  .btn.primary{background:var(--brass);color:var(--ground);border-color:var(--brass)}
+  .btn:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+  .spacer{flex:1}
+  .count{font-family:var(--font-mono);font-size:12px;color:var(--muted)}
+  /* table */
+  .scroll{overflow-x:auto;border:1px solid var(--hair);border-radius:12px;background:var(--surface)}
+  table{border-collapse:collapse;width:100%;min-width:1240px;table-layout:fixed}
+  thead th{position:sticky;top:0;background:var(--surface2);text-align:left;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--brass);padding:14px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+  thead th .sub{display:block;font-size:9px;letter-spacing:.06em;color:var(--muted);text-transform:none;font-weight:400;margin-top:3px}
+  tbody td{border-bottom:1px solid var(--hair);padding:4px;vertical-align:top}
+  tbody tr:hover{background:var(--surface2)}
+  td input,td textarea,td select{width:100%;font-family:var(--font-body);font-size:14px;color:var(--ink);background:transparent;border:none;padding:8px 8px;resize:none;line-height:1.35}
+  td textarea{min-height:38px;overflow:hidden}
+  td input:focus,td textarea:focus,td select:focus{outline:1px solid var(--brass);border-radius:5px;background:var(--surface2)}
+  td.val input{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+  select{cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:999px !important;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:6px 12px !important;border:1.5px solid currentColor !important;width:auto !important}
+  select.verified{color:var(--verified)} select.assumed{color:var(--assumed)} select.open{color:var(--open)}
+  .rownum{font-family:var(--font-mono);font-size:12px;color:var(--muted);padding:0 4px 0 10px;text-align:right;width:34px}
+  .del{cursor:pointer;color:var(--muted);border:none;background:none;font-size:18px;padding:0 10px;line-height:1}
+  .del:hover{color:var(--assumed)}
+  th.c-del,td.c-del{width:36px}
+  /* legend */
+  .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:30px}
+  .lg{background:var(--surface);border:1px solid var(--hair);border-left:4px solid var(--brass);border-radius:10px;padding:18px 20px}
+  .lg h4{margin:0 0 4px;font-family:var(--font-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+  .lg.v h4{color:var(--verified)} .lg.a h4{color:var(--assumed)} .lg.o h4{color:var(--open)}
+  .lg p{margin:6px 0 0;font-size:14px;color:var(--muted)}
+  .lg b{color:var(--ink)}
+  footer{margin-top:38px;padding-top:20px;border-top:1px solid var(--hair);color:var(--muted);font-size:12.5px;max-width:80ch}
+  @media print{
+    body{background:#fff;color:#111}
+    .bar,.del,.c-del{display:none !important}
+    .scroll{overflow:visible;border-color:#bbb}
+    thead th{position:static;color:#333;background:#eee}
+    select{border-color:#999 !important;color:#333 !important}
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">MBL · Underwriting · Lesson S1</div>
+    <h1>Evidence <em>Register</em></h1>
+    <p class="lede">Your living record of every material figure in the file — one row per input, classified before it's ever computed. Fill it as you follow the lesson. A figure that isn't in here, classified, is not yet evidence.</p>
+  </header>
+
+  <div class="meta">
+    <label>Property / File<input id="m-prop" placeholder="e.g. 437 Kingston Rd (or Training File 01)"></label>
+    <label>Prepared by<input id="m-by" placeholder="your name"></label>
+    <label>Rules version<input id="m-rules" placeholder="CMHC MLI Select · 2026-08"></label>
+    <label>Date<input id="m-date" placeholder="YYYY-MM-DD"></label>
+  </div>
+
+  <div class="bar">
+    <button class="btn primary" id="add">+ Add row</button>
+    <button class="btn" id="example">Load worked example</button>
+    <button class="btn" id="clear">Clear</button>
+    <span class="spacer"></span>
+    <span class="count"><b id="n-v">0</b> verified · <b id="n-a">0</b> assumed · <b id="n-o">0</b> open</span>
+    <button class="btn" id="print">Print / Save PDF</button>
+  </div>
+
+  <div class="scroll">
+    <table>
+      <colgroup>
+        <col style="width:32px"><col style="width:190px"><col style="width:120px"><col style="width:118px">
+        <col style="width:210px"><col style="width:160px"><col style="width:112px"><col style="width:210px">
+        <col style="width:50px"><col style="width:36px">
+      </colgroup>
+      <thead><tr>
+        <th class="rownum">#</th>
+        <th>Claim</th>
+        <th>Value</th>
+        <th>Class</th>
+        <th>Provenance<span class="sub">producer · date · incentive</span></th>
+        <th>Document</th>
+        <th>Verified</th>
+        <th>Next step</th>
+        <th>V</th>
+        <th class="c-del"></th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <div class="legend">
+    <div class="lg v"><h4>Verified — leave it alone</h4><p><b>A document + its producer.</b> You can point to the source. It needs no further work.</p></div>
+    <div class="lg a"><h4>Assumed — defend or replace</h4><p><b>A basis + a date.</b> A defensible estimate, not a fact. Show its basis, or replace it with evidence.</p></div>
+    <div class="lg o"><h4>Open — chase it</h4><p><b>Named + tracked.</b> No acceptable evidence yet. Not zero, not a guess — a finding to close.</p></div>
+  </div>
+
+  <footer>
+    Educational material only — not financial, legal, tax or lending advice. Every corrected row keeps the superseded version (append-only): grey the old row, add the new one with a date and a reason. This register grows through the Underwriting lessons into your capstone file.
+  </footer>
+</div>
+
+<script>
+  const EX = [
+    {claim:"Seller \"income\"", val:"$208,800", cls:"assumed", prov:"Seller · info sheet · wants a high price", doc:"none (potential, not actual)", vd:"", st:"Reclassified from implied-current → assumed. Replace with executed roll.", ver:"v2"},
+    {claim:"Rent roll (executed leases)", val:"$163,200 / yr", cls:"verified", prov:"Executed leases · current · neutral", doc:"6 signed leases", vd:"2026-08-01", st:"Leave — this is the supportable income line.", ver:"v2"},
+    {claim:"Property taxes", val:"$18,940 / yr", cls:"verified", prov:"Municipality · current bill · neutral", doc:"Municipal tax bill", vd:"2026-08-01", st:"Leave — proven.", ver:"v1"},
+    {claim:"Operating-expense ratio", val:"38%", cls:"assumed", prov:"MBL Operating Standard · dated · practitioner estimate", doc:"none (statements not produced)", vd:"", st:"Defend the standard, or replace with normalized statements.", ver:"v1"},
+    {claim:"Management", val:"$0 (claimed by omission)", cls:"open", prov:"Blank on seller sheet", doc:"none", vd:"", st:"Restore a standard allowance; chase the actual arrangement.", ver:"v1"},
+    {claim:"Vacancy", val:"(blank → implied zero)", cls:"open", prov:"Blank on seller sheet", doc:"none", vd:"", st:"Required deduction — pull the published, dated survey figure.", ver:"v1"},
+  ];
+  const rows = document.getElementById('rows');
+  const esc = s => (s||'').replace(/"/g,'&quot;');
+  function rowHTML(d={}){
+    const cls = d.cls||'';
+    return `<tr>
+      <td class="rownum"></td>
+      <td><textarea placeholder="e.g. Seller income claim">${esc(d.claim)}</textarea></td>
+      <td class="val"><input value="${esc(d.val)}" placeholder="$ / % / —"></td>
+      <td><select class="${cls}" onchange="this.className=this.value">
+        <option value="" ${!cls?'selected':''}>— class —</option>
+        <option value="verified" ${cls==='verified'?'selected':''}>Verified</option>
+        <option value="assumed" ${cls==='assumed'?'selected':''}>Assumed</option>
+        <option value="open" ${cls==='open'?'selected':''}>Open</option></select></td>
+      <td><textarea placeholder="who produced it · as of when · what they gained">${esc(d.prov)}</textarea></td>
+      <td><textarea placeholder="named document, or the word &quot;none&quot;">${esc(d.doc)}</textarea></td>
+      <td><input value="${esc(d.vd)}" placeholder="YYYY-MM-DD" style="font-family:var(--font-mono);font-size:13px"></td>
+      <td><textarea placeholder="leave / defend / chase — the next step">${esc(d.st)}</textarea></td>
+      <td><input value="${esc(d.ver)}" placeholder="v1" style="font-family:var(--font-mono);font-size:13px;width:56px"></td>
+      <td class="c-del"><button class="del" title="delete row" onclick="this.closest('tr').remove();renumber()">×</button></td>
+    </tr>`;
+  }
+  function addRow(d){ rows.insertAdjacentHTML('beforeend', rowHTML(d)); autosize(); renumber(); }
+  function renumber(){
+    [...rows.children].forEach((tr,i)=>tr.querySelector('.rownum').textContent=i+1);
+    let v=0,a=0,o=0; rows.querySelectorAll('select').forEach(s=>{if(s.value==='verified')v++;else if(s.value==='assumed')a++;else if(s.value==='open')o++;});
+    n_v.textContent=v; n_a.textContent=a; n_o.textContent=o;
+  }
+  function autosize(){ rows.querySelectorAll('textarea').forEach(t=>{t.style.height='auto';t.style.height=t.scrollHeight+'px';}); }
+  rows.addEventListener('input',e=>{ if(e.target.tagName==='TEXTAREA'){e.target.style.height='auto';e.target.style.height=e.target.scrollHeight+'px';} });
+  rows.addEventListener('change',renumber);
+  document.getElementById('add').onclick=()=>addRow();
+  document.getElementById('example').onclick=()=>{ rows.innerHTML=''; EX.forEach(addRow); document.getElementById('m-prop').value='Training File 01 — the East-End Six'; document.getElementById('m-rules').value='CMHC MLI Select · 2026-08'; };
+  document.getElementById('clear').onclick=()=>{ rows.innerHTML=''; for(let i=0;i<4;i++)addRow(); };
+  document.getElementById('print').onclick=()=>window.print();
+  // start with a few blank rows
+  for(let i=0;i<5;i++) addRow();
+</script>
