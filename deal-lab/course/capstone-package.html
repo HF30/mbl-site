@@ -1,0 +1,153 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MBL — Capstone Submission Package Worksheet</title>
+<style>
+  :root {
+    --ground:#0f1620; --surface:#16212e; --surface2:#1b2836; --ink:#e9e6dd; --muted:#93a0ad;
+    --brass:#d0aa41; --brass-deep:#b9932e; --line:rgba(208,170,65,0.18); --hair:rgba(255,255,255,0.09);
+    --verified:#7ec98f; --assumed:#e0a44f; --open:#8b95a3;
+    --font-display:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --font-body:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:light){
+    :root{--ground:#f5f2ea;--surface:#fff;--surface2:#faf8f2;--ink:#1c2530;--muted:#5d6772;
+    --brass:#9c7c1c;--brass-deep:#856a17;--line:rgba(156,124,28,0.28);--hair:rgba(0,0,0,0.12);
+    --verified:#2f8a4e;--assumed:#b5771f;--open:#5d6772;}
+  }
+  :root[data-theme="dark"]{--ground:#0f1620;--surface:#16212e;--surface2:#1b2836;--ink:#e9e6dd;--muted:#93a0ad;--brass:#d0aa41;--line:rgba(208,170,65,0.18);--hair:rgba(255,255,255,0.09);--verified:#7ec98f;--assumed:#e0a44f;--open:#8b95a3;}
+  :root[data-theme="light"]{--ground:#f5f2ea;--surface:#fff;--surface2:#faf8f2;--ink:#1c2530;--muted:#5d6772;--brass:#9c7c1c;--line:rgba(156,124,28,0.28);--hair:rgba(0,0,0,0.12);--verified:#2f8a4e;--assumed:#b5771f;--open:#5d6772;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--font-body);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1340px;margin:0 auto;padding:clamp(22px,4vw,48px) clamp(16px,3vw,34px) 70px}
+  .eyebrow{font-family:var(--font-mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--brass);display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:30px;height:1.5px;background:var(--brass)}
+  h1{font-family:var(--font-display);font-weight:600;font-size:clamp(30px,5vw,46px);margin:16px 0 0;letter-spacing:-.01em}
+  h1 em{font-style:italic;color:var(--brass)}
+  .lede{color:var(--muted);font-size:16px;max-width:70ch;margin:12px 0 0}
+  .meta{display:flex;flex-wrap:wrap;gap:18px 34px;margin:26px 0 8px;padding-bottom:22px;border-bottom:1px solid var(--hair)}
+  .meta label{display:flex;flex-direction:column;gap:6px;font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .meta input{font-family:var(--font-body);font-size:15px;color:var(--ink);background:transparent;border:none;border-bottom:1px solid var(--line);padding:5px 2px;min-width:200px}
+  .meta input:focus{outline:none;border-bottom-color:var(--brass)}
+  .bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0 6px}
+  .btn{appearance:none;cursor:pointer;font-family:var(--font-body);font-size:13.5px;font-weight:600;padding:9px 16px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--ink);transition:.15s}
+  .btn:hover{background:var(--brass);color:var(--ground);border-color:var(--brass)}
+  .btn:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+  .spacer{flex:1}
+  h2{font-family:var(--font-display);font-weight:600;font-size:24px;margin:40px 0 4px}
+  h2 .num{font-family:var(--font-mono);font-size:13px;color:var(--brass);letter-spacing:.16em;margin-right:10px;vertical-align:2px}
+  .secnote{color:var(--muted);font-size:14.5px;max-width:78ch;margin:6px 0 14px}
+  .scroll{overflow-x:auto;border:1px solid var(--hair);border-radius:12px;background:var(--surface)}
+  table{border-collapse:collapse;width:100%;table-layout:fixed}
+  thead th{position:sticky;top:0;background:var(--surface2);text-align:left;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--brass);padding:13px 10px;border-bottom:1px solid var(--line)}
+  tbody td{border-bottom:1px solid var(--hair);padding:4px;vertical-align:top}
+  tbody tr:hover{background:var(--surface2)}
+  tbody tr:last-child td{border-bottom:none}
+  td.fixed{font-size:14px;padding:10px 10px;color:var(--ink)}
+  td.fixed .sub{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+  td.fixed.total{font-weight:700;color:var(--brass)}
+  td input,td textarea,td select{width:100%;font-family:var(--font-body);font-size:14px;color:var(--ink);background:transparent;border:none;padding:8px 8px;resize:none;line-height:1.35}
+  td textarea{min-height:38px;overflow:hidden}
+  td input:focus,td textarea:focus,td select:focus{outline:1px solid var(--brass);border-radius:5px;background:var(--surface2)}
+  td.val input{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+  select{cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:999px !important;font-family:var(--font-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:6px 12px !important;border:1.5px solid currentColor !important;width:auto !important;color:var(--open)}
+  select.verified{color:var(--verified)} select.assumed{color:var(--assumed)} select.open{color:var(--open)}
+  select.pass{color:var(--verified)} select.revise{color:var(--assumed)} select.stop{color:#d17b6f} select.done{color:var(--verified)}
+  .del{cursor:pointer;color:var(--muted);border:none;background:none;font-size:18px;padding:0 10px;line-height:1}
+  .del:hover{color:var(--assumed)}
+  th.c-del,td.c-del{width:36px}
+  footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--hair);color:var(--muted);font-size:12.5px;max-width:86ch}
+  @media print{
+    body{background:#fff;color:#111}
+    .bar,.del,.c-del{display:none !important}
+    .scroll{overflow:visible;border-color:#bbb}
+    thead th{position:static;color:#333;background:#eee}
+    select{border-color:#999 !important;color:#333 !important}
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">MBL · Capstone · Lesson C1</div>
+    <h1>Capstone <em>Submission Package</em></h1>
+    <p class="lede">Assemble the chain — underwriting, financing, acquisitions, stabilization — into one traceable package, run the contradiction pass, self-score the rubric, and freeze the version to submit.</p>
+  </header>
+
+  <div class="meta">
+    <label>Property / File<input placeholder="e.g. Sample Deal A (or your own file — no street address in course copies)"></label>
+    <label>Prepared by<input placeholder="your name"></label>
+    <label>Version<input placeholder="v1"></label>
+    <label>Date<input placeholder="YYYY-MM-DD"></label>
+  </div>
+
+  <div class="bar"><span class="spacer"></span><button class="btn printbtn">Print / Save PDF</button></div>
+  
+  <h2><span class="num">01</span>Assembly checklist (in order)</h2>
+  <p class="secnote">Confirm every index link opens the intended current file.</p>
+  <div class="scroll"><table>
+    <colgroup><col style="width:420px"><col style="width:118px"><col style="width:auto"></colgroup>
+    <thead><tr><th>Item</th><th>Status</th><th>Source file · version</th></tr></thead>
+    <tbody id="tb-assemble"><tr><td class="fixed">Executive summary (the governed deal, not a sales pitch)</td><td><select><option value="" selected>—</option><option value="done">Done</option><option value="open">Open</option></select></td><td><textarea placeholder=""></textarea></td></tr>
+<tr><td class="fixed">Versioned Underwriting File</td><td><select><option value="" selected>—</option><option value="done">Done</option><option value="open">Open</option></select></td><td><textarea placeholder=""></textarea></td></tr>
+<tr><td class="fixed">Financing Decision Memo + Points Memo</td><td><select><option value="" selected>—</option><option value="done">Done</option><option value="open">Open</option></select></td><td><textarea placeholder=""></textarea></td></tr>
+<tr><td class="fixed">Agreement · DD Tracker · zoning/permit status · closing controls</td><td><select><option value="" selected>—</option><option value="done">Done</option><option value="open">Open</option></select></td><td><textarea placeholder=""></textarea></td></tr>
+<tr><td class="fixed">Stabilization &amp; Refinance Plan</td><td><select><option value="" selected>—</option><option value="done">Done</option><option value="open">Open</option></select></td><td><textarea placeholder=""></textarea></td></tr>
+<tr><td class="fixed">Supporting documents + open-items register</td><td><select><option value="" selected>—</option><option value="done">Done</option><option value="open">Open</option></select></td><td><textarea placeholder=""></textarea></td></tr>
+</tbody>
+  </table></div>
+  
+  <h2><span class="num">02</span>Contradiction pass</h2>
+  <p class="secnote">If any answer is no — stop and repair the source file before exporting.</p>
+  <div class="scroll"><table>
+    <colgroup><col style="width:480px"><col style="width:110px"><col style="width:auto"></colgroup>
+    <thead><tr><th>Check</th><th>OK?</th><th>Note</th></tr></thead>
+    <tbody id="tb-contra"><tr><td class="fixed">Executive summary ties to the underwriting file</td><td><select><option value="" selected>—</option><option value="done">Done</option><option value="open">Open</option></select></td><td><textarea placeholder=""></textarea></td></tr>
+<tr><td class="fixed">Stabilized NOI ties to the expense schedule</td><td><select><option value="" selected>—</option><option value="done">Done</option><option value="open">Open</option></select></td><td><textarea placeholder=""></textarea></td></tr>
+<tr><td class="fixed">Financing request ties to the same NOI + current program assumptions</td><td><select><option value="" selected>—</option><option value="done">Done</option><option value="open">Open</option></select></td><td><textarea placeholder=""></textarea></td></tr>
+<tr><td class="fixed">Agreement dates tie to the diligence and closing trackers</td><td><select><option value="" selected>—</option><option value="done">Done</option><option value="open">Open</option></select></td><td><textarea placeholder=""></textarea></td></tr>
+<tr><td class="fixed">Refinance plan uses the same budget, value, debt, capital-left-in</td><td><select><option value="" selected>—</option><option value="done">Done</option><option value="open">Open</option></select></td><td><textarea placeholder=""></textarea></td></tr>
+</tbody>
+  </table></div>
+  
+  <h2><span class="num">03</span>Rubric self-score</h2>
+  <p class="secnote">For every score below complete: write the missing evidence, the owner, and the correction deadline. Raise a score only when the package contains the evidence.</p>
+  <div class="scroll"><table>
+    <colgroup><col style="width:300px"><col style="width:130px"><col style="width:auto"></colgroup>
+    <thead><tr><th>Dimension</th><th>Score</th><th>Missing evidence · owner · deadline</th></tr></thead>
+    <tbody id="tb-rubric"><tr><td class="fixed">Evidence &amp; traceability</td><td><select><option value="" selected>—</option><option value="done">Done</option><option value="open">Open</option></select></td><td><textarea placeholder=""></textarea></td></tr>
+<tr><td class="fixed">Underwriting consistency</td><td><select><option value="" selected>—</option><option value="done">Done</option><option value="open">Open</option></select></td><td><textarea placeholder=""></textarea></td></tr>
+<tr><td class="fixed">Financing logic</td><td><select><option value="" selected>—</option><option value="done">Done</option><option value="open">Open</option></select></td><td><textarea placeholder=""></textarea></td></tr>
+<tr><td class="fixed">Acquisition execution</td><td><select><option value="" selected>—</option><option value="done">Done</option><option value="open">Open</option></select></td><td><textarea placeholder=""></textarea></td></tr>
+<tr><td class="fixed">Stabilization &amp; refinance logic</td><td><select><option value="" selected>—</option><option value="done">Done</option><option value="open">Open</option></select></td><td><textarea placeholder=""></textarea></td></tr>
+<tr><td class="fixed">Professional boundaries</td><td><select><option value="" selected>—</option><option value="done">Done</option><option value="open">Open</option></select></td><td><textarea placeholder=""></textarea></td></tr>
+</tbody>
+  </table></div>
+  
+  <h2><span class="num">04</span>What this course sample cannot complete</h2>
+  <p class="secnote">Marked, not hidden.</p>
+  <div class="scroll"><table>
+    <colgroup><col style="width:420px"><col style="width:auto"></colgroup>
+    <thead><tr><th>Item</th><th>Comes from</th></tr></thead>
+    <tbody id="tb-cannot"><tr><td class="fixed">Borrower entity, ownership, net worth, experience, equity source, authority</td><td><textarea placeholder="">the actual borrower + licensed professionals</textarea></td></tr>
+<tr><td class="fixed">Appraisal, environmental, insurance terms, zoning/permit opinions, lender forms</td><td><textarea placeholder="">the appropriate third parties</textarea></td></tr>
+<tr><td class="fixed">Final rate, amortization, premium, proceeds, covenants, approval</td><td><textarea placeholder="">the insurer and lender</textarea></td></tr>
+</tbody>
+  </table></div>
+  
+
+  <footer>Missing evidence stays labelled open; it never becomes an assumption dressed as a fact. The package is a sample for discussion with licensed professionals — it is not lender-ready and does not declare the property financeable. Educational material only — a sample for discussion with licensed professionals; not financial, legal, tax or lending advice. Only a lender determines approval and terms.</footer>
+</div>
+<script>
+  function autosize(t){t.style.height='auto';t.style.height=t.scrollHeight+'px';}
+  document.querySelectorAll('textarea').forEach(autosize);
+  document.addEventListener('input',e=>{if(e.target.tagName==='TEXTAREA')autosize(e.target);});
+  document.addEventListener('change',e=>{if(e.target.tagName==='SELECT')e.target.className=e.target.value;});
+  document.querySelectorAll('.addrow').forEach(b=>b.onclick=()=>{
+    const tb=document.getElementById(b.dataset.tbody);
+    const tpl=tb.querySelector('tr.blank-template');
+    const c=tpl.cloneNode(true); c.classList.remove('blank-template'); c.style.display='';
+    tb.appendChild(c); c.querySelectorAll('textarea').forEach(autosize);
+  });
+  document.querySelectorAll('.printbtn').forEach(b=>b.onclick=()=>window.print());
+  document.addEventListener('click',e=>{if(e.target.classList.contains('del')){e.target.closest('tr').remove();}});
+</script>
