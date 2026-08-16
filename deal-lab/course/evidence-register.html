@@ -130,12 +130,12 @@
 
 <script>
   const EX = [
-    {claim:"Seller \"income\"", val:"$208,800", cls:"assumed", prov:"Seller · info sheet · wants a high price", doc:"none (potential, not actual)", vd:"", st:"Reclassified from implied-current → assumed. Replace with executed roll.", ver:"v2"},
-    {claim:"Rent roll (executed leases)", val:"$163,200 / yr", cls:"verified", prov:"Executed leases · current · neutral", doc:"6 signed leases", vd:"2026-08-01", st:"Leave — this is the supportable income line.", ver:"v2"},
-    {claim:"Property taxes", val:"$18,940 / yr", cls:"verified", prov:"Municipality · current bill · neutral", doc:"Municipal tax bill", vd:"2026-08-01", st:"Leave — proven.", ver:"v1"},
-    {claim:"Operating-expense ratio", val:"38%", cls:"assumed", prov:"MBL Operating Standard · dated · practitioner estimate", doc:"none (statements not produced)", vd:"", st:"Defend the standard, or replace with normalized statements.", ver:"v1"},
-    {claim:"Management", val:"$0 (claimed by omission)", cls:"open", prov:"Blank on seller sheet", doc:"none", vd:"", st:"Restore a standard allowance; chase the actual arrangement.", ver:"v1"},
-    {claim:"Vacancy", val:"(blank → implied zero)", cls:"open", prov:"Blank on seller sheet", doc:"none", vd:"", st:"Required deduction — pull the published, dated survey figure.", ver:"v1"},
+    {claim:"Seller \"income\" (marketed pro-forma)", val:"$153,000 / yr", cls:"assumed", prov:"Seller · marketing sheet · wants a high price", doc:"none (potential, not actual)", vd:"", st:"Reclassified from implied-current → assumed. Replace with executed roll.", ver:"v2"},
+    {claim:"Rent roll (executed leases)", val:"$107,400 / yr ($8,950/mo)", cls:"verified", prov:"Executed leases · current · neutral", doc:"5 signed leases", vd:"2026-08-01", st:"Leave — this is the verified in-place income line.", ver:"v2"},
+    {claim:"Property taxes", val:"$8,100 / 2026", cls:"verified", prov:"Municipality · current bill · neutral", doc:"Municipal tax bill", vd:"2026-08-01", st:"Leave — proven as of the bill date.", ver:"v1"},
+    {claim:"Operating expenses (as-is)", val:"≈$40,000 / yr", cls:"assumed", prov:"Normalization allowance · dated · practitioner estimate", doc:"none (statements not produced)", vd:"", st:"Defend the allowance, or replace with normalized statements.", ver:"v1"},
+    {claim:"Advertised cap rate", val:"5.5% (seller claim)", cls:"open", prov:"Seller marketing · no normalized trail", doc:"none", vd:"", st:"Record as claim. Rebuild income & expenses before any cap conclusion.", ver:"v1"},
+    {claim:"Vacancy", val:"(blank → implied zero)", cls:"open", prov:"Blank on seller sheet", doc:"none", vd:"", st:"Required deduction — carry the dated 3% as-is assumption.", ver:"v1"},
   ];
   const rows = document.getElementById('rows');
   const esc = s => (s||'').replace(/"/g,'&quot;');
@@ -168,7 +168,7 @@
   rows.addEventListener('input',e=>{ if(e.target.tagName==='TEXTAREA'){e.target.style.height='auto';e.target.style.height=e.target.scrollHeight+'px';} });
   rows.addEventListener('change',renumber);
   document.getElementById('add').onclick=()=>addRow();
-  document.getElementById('example').onclick=()=>{ rows.innerHTML=''; EX.forEach(addRow); document.getElementById('m-prop').value='Training File 01 — the East-End Six'; document.getElementById('m-rules').value='CMHC MLI Select · 2026-08'; };
+  document.getElementById('example').onclick=()=>{ rows.innerHTML=''; EX.forEach(addRow); document.getElementById('m-prop').value='Sample Deal A — a Roncesvalles five-plex'; document.getElementById('m-rules').value='CMHC MLI Select · 2026-08'; };
   document.getElementById('clear').onclick=()=>{ rows.innerHTML=''; for(let i=0;i<4;i++)addRow(); };
   document.getElementById('print').onclick=()=>window.print();
   // start with a few blank rows
