@@ -1,0 +1,31 @@
+VERDICT: FIX FIRST
+
+# MAJOR
+
+1. **The rebate article omits the lower construction-start boundary from its eligibility rule.** It describes qualifying projects only as having “construction starting before 2031” (`blog/hst-rebate-new-rental-construction.html:12`), but the enhanced federal and Ontario rebates require construction to begin after September 13, 2023 and before 2031. A project started on or before that date does not qualify for the promised 100% rebate.
+
+2. **The MLI Select article states the wrong maximum for new-construction affordability points.** “Affordability (the big lever — up to 70 points)” (`blog/mli-select-explained-for-first-timers.html:17`) contradicts the current new-construction matrix: 10%/15%/25% affordable units earn 50/70/100 points. This erases the 25%-for-100-points route.
+
+3. **The MLI Select article converts a maximum leverage limit into a promised equity requirement.** “MLI Select at the 100-point tier means ~5% equity plus the insurance premium” (`blog/mli-select-explained-for-first-timers.html:12`) omits that 95% LTC is only an upper limit and that the insured loan remains constrained by lending value and the minimum 1.10 DCR for standard rentals. A 100-point score does not itself make a project financeable with 5% equity.
+
+4. **The cost article’s answer to “under $2M all-in” uses the wrong subtotal and silently drops two costs that its own all-in table includes.** It says “construction plus softs plus contingency lands just around the $2M line” (`blog/cost-to-build-sixplex-toronto.html:69`), but those three low-end inputs total only about $1.74M. Reaching roughly $1.99M requires adding the omitted $150k CMHC premium/PST and $100k financing/interim interest shown in the table (`blog/cost-to-build-sixplex-toronto.html:41`, `blog/cost-to-build-sixplex-toronto.html:45`). The conclusion may approach $2M at the lowest assumptions, but the published arithmetic and “all-in” explanation do not.
+
+5. **The development-charge claim is categorical beyond the actual exemption.** “Development charges are $0 — Toronto waived DCs for these buildings” (`blog/cost-to-build-sixplex-toronto.html:58`) does not say that the City exemption is for developments with up to six units, remains subject to the governing by-law and property facts, and does not mean every development-related charge or fee is zero. “The same building typically also gets development charges waived” (`blog/hst-rebate-new-rental-construction.html:23`) repeats the claim without defining that scope or an as-of date.
+
+6. **The published rent figures do not support the claimed universal $300–400+ three-bedroom premium.** The article gives East York medians of $3,850 for three-bedrooms and $2,350 for two-bedrooms—a $1,500 difference—and Beaches bands of $4,000–4,600 versus $3,950–4,195, whose raw endpoints do not establish a matched $300–400 premium (`blog/toronto-multiplex-rents-what-actually-closed.html:15-17`). Yet it calls $300–400+ “the pattern across every pocket” (`blog/toronto-multiplex-rents-what-actually-closed.html:17`) and “proves it across Toronto’s east end” (`blog/three-bedroom-arbitrage.html:9`). The article needs matched comparable medians, sample sizes and an observation cutoff to substantiate that conclusion.
+
+7. **The three-bedroom value calculation capitalizes gross rent as though it were NOI.** “$300–400+ more per month” is turned directly into “$70–95k of building value at a 5% cap rate” (`blog/three-bedroom-arbitrage.html:15`). The arithmetic is $72–96k only if the entire gross rent increment is NOI; cap rates apply to NOI, so the calculation must state and support the incremental-expense assumption or deduct incremental operating costs.
+
+8. **The rent article makes an unverifiable, undated effective-rent claim during an incentive-heavy market.** “Purpose-built new units have printed at or above those numbers” (`blog/toronto-multiplex-rents-what-actually-closed.html:16`) and “have consistently printed at or above the older-stock band” (`blog/toronto-multiplex-rents-what-actually-closed.html:27-28`) give no period, sample size, geography boundary, or treatment of concessions. With Toronto’s October 2025 survey reporting widespread incentives and roughly 7% vacancy in buildings completed within three years, face rent alone cannot substantiate a “consistently” higher effective-rent result.
+
+9. **The lot article overstates sixplex eligibility.** “Almost any standard lot in the nine as-of-right wards can legally hold a sixplex” (`blog/what-lot-do-you-need-for-a-sixplex.html:9`) collapses ward location into legal eligibility. Six-unit permission is limited by the applicable residential zoning/building type and remains subject to site-specific overlays and constraints; being a “standard lot” in one of nine wards is not by itself enough.
+
+10. **The homepage makes an absolute financing-superiority claim that the stated facts cannot establish.** MLI Select scoring is said to unlock “the strongest financing available for rental housing in Canada” (`index.html:19`). Terms remain lender-, project-, DCR-, valuation- and premium-dependent, so no program rule supports an unqualified nationwide superlative.
+
+# MINOR
+
+1. **The tax filing sequence is presented as a universal imperative when registration is not itself a condition of rebate eligibility.** “Register the project entity for GST/HST from day one” (`blog/hst-rebate-new-rental-construction.html:17`) should be qualified as structure-specific professional advice; CRA permits eligible rebate claims without a GST/HST account, although registration affects the filing route and ITC treatment.
+
+2. **The fixed-price risk statement is absolute.** “A fixed price moves cost overrun risk from your pro forma to the builder’s margin” (`blog/cost-to-build-sixplex-toronto.html:13`) ignores exclusions, allowances, owner changes, concealed conditions and contractual relief. It should say risk is transferred only to the extent the signed scope and contract allocate it.
+
+3. **The homepage’s closed-data benchmark has no observation period.** “Values at a cap rate above every observed multifamily trade” (`index.html:18`) does not identify the geography, source, sample or time window behind “every,” so the claim cannot remain true or be publicly checked as the market changes.
