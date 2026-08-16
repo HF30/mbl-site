@@ -89,6 +89,17 @@
     <video controls playsInline preload="metadata" src="video/1-6.mp4"></video>
     <div class="vfoot">Independent education · not affiliated with CMHC · not financial, legal, tax or lending advice.</div></div>
 
+  <div class="lesson" id="workbook" style="border-top-color:#e6c558">
+    <span class="num">The Worksheet</span><h2>The Financing Readiness Workbook</h2>
+    <p>Lesson 6's assignment: score your own readiness, build the open-item list, and pick the route that matches your property. Enter your email and the workbook downloads instantly — we'll also send occasional closed-rent data and course updates (unsubscribe anytime).</p>
+    <form id="wbform" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:4px">
+      <input id="wbemail" type="email" required placeholder="your@email.com" style="flex:1;min-width:220px;font:15px var(--body);color:var(--text);background:var(--bg);border:1px solid var(--line2);border-radius:8px;padding:12px 14px">
+      <button type="submit" style="font:600 14.5px var(--head);padding:12px 22px;border-radius:8px;background:var(--brass);color:#0a1018;border:none;cursor:pointer">Get the workbook</button>
+    </form>
+    <div id="wbmsg" class="vfoot" style="display:none"></div>
+    <div class="vfoot">Independent education · not affiliated with CMHC · not financial, legal, tax or lending advice.</div>
+  </div>
+
   <div class="lesson"><span class="num">Lesson 7 · Finale</span><h2>Real properties, budgeted out</h2>
     <p>Two Toronto multiplexes from public records — one the market rewarded and the screen fails, one the market ignored and the screen clears.</p>
     <video controls playsInline preload="metadata" src="video/1-7.mp4"></video>
@@ -109,5 +120,21 @@
 
 <footer><div class="wrap">MBL Developments &middot; Toronto missing-middle rental development &middot; chris@mbldevelopments.com<br>
 Content is general information, not investment, legal or tax advice. Nothing on this site is an offer of securities. MBL Developments and its educational materials are independent of Canada Mortgage and Housing Corporation (CMHC) — not affiliated with, endorsed by, or sponsored by CMHC.</div></footer>
+<script>
+  document.getElementById('wbform').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const msg = document.getElementById('wbmsg'); msg.style.display = 'block'; msg.textContent = 'One moment…';
+    try {
+      const r = await fetch('https://aganakkpulqhugxjqonh.supabase.co/functions/v1/workbook-download', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFnYW5ha2twdWxxaHVneGpxb25oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYzMDA4NTQsImV4cCI6MjEwMTg3Njg1NH0.RumHbi6qO4oX3y_k5DYLvnorDKvOPPBAvyzvNUr_3Y0'},
+        body: JSON.stringify({email: document.getElementById('wbemail').value.trim(), source: 'basics-page'})
+      });
+      const d = await r.json();
+      if (d.url) { msg.innerHTML = '<a href="' + d.url + '" style="font-weight:700">Download the workbook ↓</a> (link valid ~60 minutes)'; }
+      else { msg.textContent = 'Something went wrong — email chris@mbldevelopments.com and we\'ll send it over.'; }
+    } catch { msg.textContent = 'Something went wrong — email chris@mbldevelopments.com and we\'ll send it over.'; }
+  });
+</script>
 </body>
 </html>
